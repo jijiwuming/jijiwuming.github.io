@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% var title=page.title; if (is_archive()){ title=__('archive'); if
+    (is_month()){ title +='：' + page.year + '/' + page.month; } else if (is_year()){ title
+    +='：' + page.year; } } else if (is_category()){ title=__('count.categories') + '：' +
+    page.category; } else if (is_tag()){ title=__('count.tags') + '：' + page.tag; } %>
+    <title><% if (title){ %> <%= title %> - <% } %> <%= config.title %></title>
+    <% if (theme.favicon) { %>
+        <link
+            rel="shortcut icon"
+            href="<%= theme.favicon.href %>"
+            type="<%= theme.favicon.type %>"
+        />
+    <% } %>
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css">
+</head>
+<body>
+    <%- body %>
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <script src="/lib/lazysizes.min.js"></script>
+</body>
+</html>

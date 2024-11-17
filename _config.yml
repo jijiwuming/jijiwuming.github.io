@@ -8,8 +8,8 @@ subtitle: '总在樊笼里，哪得返自然'
 description: '遍书吾心呓语，但博诸公一笑'
 keywords: 博客,jijiwuming
 author: jijiwuming
-language:
-- zh
+language: 
+- zh-CN
 - en
 timezone: 'Asia/Shanghai'
 
@@ -98,8 +98,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
-
+theme: cage
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:

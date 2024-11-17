@@ -1,0 +1,20 @@
+favicon:
+  href: /images/favicon.png
+  type: image/png
+background: # 既是博客的背景，又是文章默认头图
+  path: /images/favicon.png
+  width: 800
+  height: 800
+copyright: '<strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可'
+cdn:
+  gitalk:
+    css: https://unpkg.com/gitalk@latest/dist/gitalk.css
+    js: https://unpkg.com/gitalk@latest/dist/gitalk.min.js
+  giscus:
+    js: https://giscus.app/client.js
+# 评论区
+gitalk:
+  active: false # 是否启用 gitalk
+# https://giscus.app/zh-CN 可以在这个网站上手动选择配置填到下方对应位置
+giscus:
+  active: false # 是否启用 giscus
