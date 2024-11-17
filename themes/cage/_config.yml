@@ -12,6 +12,11 @@ cdn:
     js: https://unpkg.com/gitalk@latest/dist/gitalk.min.js
   giscus:
     js: https://giscus.app/client.js
+color: # 配色方案
+  first: # 同时作为主题色
+    r: 49
+    g: 174
+    b: 255
 # 评论区
 gitalk:
   active: false # 是否启用 gitalk
