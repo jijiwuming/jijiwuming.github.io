@@ -3,6 +3,11 @@ $radius = 13px;
 $color1 = rgb(hexo-config('color.first.r'), hexo-config('color.first.g'), hexo-config('color.first.b'));
 
 .cage-post {
+	min-height: 100vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	&-cover {
 		width: 100%;
 		position: relative;
@@ -164,6 +169,7 @@ $color1 = rgb(hexo-config('color.first.r'), hexo-config('color.first.g'), hexo-c
 	}
 
 	.cage-post-footer {
+		flex: 0 0 auto;
 		background-color: #f5f6f5;
 		padding: $gutter;
 		margin: -($gutter);
