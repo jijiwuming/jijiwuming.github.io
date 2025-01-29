@@ -1,7 +1,7 @@
 <div class="cage-posts">
     <% page.posts.each(function (page) { %>
         <div class="cage-post">
-            <a href="<%- url_for(page.path) %>">
+            <a class="post-link" href="<%- url_for(page.path) %>">
                 <% if (page.cover){ %>
                 <div
                     class="cage-post-cover mdui-ripple"

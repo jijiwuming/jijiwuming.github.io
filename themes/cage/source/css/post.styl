@@ -1,14 +1,15 @@
 $gutter = 25px;
 $radius = 13px;
 $color1 = rgb(hexo-config('color.first.r'), hexo-config('color.first.g'), hexo-config('color.first.b'));
-
-.cage-post {
+.mdui-loaded > .cage-post {
 	min-height: 100vh;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	&-cover {
+	box-sizing: border-box;
+	padding: max(1vh, 20px) max(1vw, 20px);
+	.cage-post-cover {
 		width: 100%;
 		position: relative;
 		overflow: hidden;
@@ -112,7 +113,7 @@ $color1 = rgb(hexo-config('color.first.r'), hexo-config('color.first.g'), hexo-c
 	}
 
 	.cage-post-copyright {
-		margin: 0 -25px;
+		margin: 0;
 		margin-bottom: 25px;
 		padding: 25px;
 		color: #191919;
