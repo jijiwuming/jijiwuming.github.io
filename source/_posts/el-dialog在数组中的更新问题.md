@@ -7,7 +7,7 @@ cover: https://th.bing.com/th/id/OIP.IXOC4xuxXLQGvzTWKxJgdAHaGF
 
 公司的项目还在使用 Vue 2 和 element-ui ，在实现功能时发现了一个奇怪的问题，点开弹窗后再更新列表数据，列表数据不展示了。
 
-![列表不展示](https://article.biliimg.com/bfs/new_dyn/582d232c16aff2d22261f10289deea774652822.png@.webp)
+![列表不展示](./images/el-dialog在数组中的更新问题/列表不展示.webp)
 
 ## TL;DR
 
