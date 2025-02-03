@@ -1,7 +1,5 @@
-$gutter = 25px;
-$radius = 13px;
-$color1 = rgb(hexo-config('color.first.r'), hexo-config('color.first.g'), hexo-config('color.first.b'));
-.mdui-loaded > .cage-post {
+.cage-detail-post {
+	background-color: #fff;
 	min-height: 100vh;
 	overflow: hidden;
 	display: flex;
@@ -10,7 +8,6 @@ $color1 = rgb(hexo-config('color.first.r'), hexo-config('color.first.g'), hexo-c
 	box-sizing: border-box;
 	padding: max(1vh, 20px) max(1vw, 20px);
 	.cage-post-cover {
-		width: 100%;
 		position: relative;
 		overflow: hidden;
 		border-radius: 16px;
@@ -26,8 +23,8 @@ $color1 = rgb(hexo-config('color.first.r'), hexo-config('color.first.g'), hexo-c
 			right: 0;
 			top: 0;
 			object-fit: cover;
-			max-width: 100%;
-			max-height: 100%;
+			width: 100%;
+			height: 100%;
 
 			&.lazyloaded {
 				opacity: 1;
@@ -91,6 +88,24 @@ $color1 = rgb(hexo-config('color.first.r'), hexo-config('color.first.g'), hexo-c
 	.cage-post-meta {
 		margin: $gutter 0px;
 		font-size: 0;
+		.cage-category {
+			display: inline-flex;
+			align-items: center;
+			column-gap: 4px;
+			color: #fff;
+			background-color: $mainC;
+		}
+		.cage-tag {
+			display: inline-flex;
+			align-items: center;
+			column-gap: 4px;
+			color: #fff;
+			background-color: $mainC;			
+		}
+		.post-item {
+			display: inline-flex;
+			align-items: center;
+		}
 
 		a {
 			border-radius: 20px;
@@ -100,10 +115,6 @@ $color1 = rgb(hexo-config('color.first.r'), hexo-config('color.first.g'), hexo-c
 			margin-bottom: 5px;
 			margin-right: 10px;
 			text-decoration: none;
-
-			.kirafont {
-				font-size: 14px;
-			}
 		}
 
 		a::before,
@@ -123,7 +134,7 @@ $color1 = rgb(hexo-config('color.first.r'), hexo-config('color.first.g'), hexo-c
 		overflow: hidden;
 
 		a {
-			color: $color1;
+			color: $mainC;
 		}
 	}
 
@@ -157,13 +168,13 @@ $color1 = rgb(hexo-config('color.first.r'), hexo-config('color.first.g'), hexo-c
 			div a {
 				transition: 0.2s;
 				padding: 0.2em;
-				color: $color1;
-				border-bottom: 1px solid rgba($color1, 0.85);
+				color: $mainC;
+				border-bottom: 1px solid rgba($mainC, 0.85);
 
 				&:hover {
-					text-shadow: 0px 0px 5px rgba($color1, 0.25);
+					text-shadow: 0px 0px 5px rgba($mainC, 0.25);
 					text-decoration: none;
-					border-bottom: 1px solid $color1;
+					border-bottom: 1px solid $mainC;
 				}
 			}
 		}

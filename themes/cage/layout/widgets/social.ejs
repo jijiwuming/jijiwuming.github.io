@@ -1,0 +1,23 @@
+<div class="cage-widget-wrap">
+	<div class="cage-widget cage-social">
+		<% for (name in theme.social) { %>
+			<a
+				class="social-btn"
+				href="<%- url_for(theme.social[name][0]) -%>"
+				target="_blank"
+				mdui-tooltip="{content: '<%= name %>'}"
+				style="color: <%= theme.social[name][2] %>; background-color: <%= theme.social[name][3] %>;"
+			>
+				<% if (theme.social[name][1]) { %>
+					<% if (theme.social[name][1].startsWith('<')) { %>
+						<%- theme.social[name][1] %>
+					<% } else { %>
+					<img class="social-icon" src="<%= theme.social[name][1] %>"/>
+					<% } %>
+				<% } else { %>
+					<mdui-icon name='crop_square'></mdui-icon>
+				<% } %>
+			</a>
+		<% } %>
+	</div>
+</div>

@@ -1,4 +1,4 @@
-<div class="cage-post">
+<div class="cage-detail-post">
 	<article>
 		<% if (page.cover){ %>
 		<div class="cage-post-cover">
@@ -25,9 +25,9 @@
 		</div>
 		<% } %>
 		<div class="cage-post-meta cage-rainbow" style="margin:10px 0!important;">
-			<a><i class="kirafont icon-calendar-fill"></i><%- date(page.date, "YYYY年MM月DD日") %></a>
-			<a><i class="kirafont icon-edit-fill"></i><%= wordcount(page.content) %> 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 <%= min2read(page.content, {cn: 250, en: 160}) %> 分钟</a>
+			<a class="post-item"><mdui-icon name="calendar_month"></mdui-icon><%- date(page.date, "YYYY年MM月DD日") %></a>
+			<a class="post-item"><mdui-icon name="edit"></mdui-icon><%= wordcount(page.content) %> 字</a>
+			<a class="post-item"><mdui-icon name="access_time"></mdui-icon>大概 <%= min2read(page.content, {cn: 250, en: 160}) %> 分钟</a>
 		</div>
 		<%- image_auto_lazyload(page.content) %>
 	</article>
@@ -64,16 +64,22 @@
 		<% if (page.categories && page.categories.length){ %>
 			<%- list_categories(page.categories, {
 				show_count: false,
-				class: 'kirafont icon-container-fill ',
+				class: 'cage-category ',
 				style: 'none',
+				transform(str) {
+					return `<mdui-icon name="folder"></mdui-icon>` + str
+				},
 				separator: ''
 			}) %>
 		<% } %>
 		<% if (page.tags && page.tags.length){ %>
 			<%- list_tags(page.tags, {
 				show_count: false,
-				class: 'kirafont icon-tag-fill ',
+				class: 'cage-tag ',
 				style: 'none',
+				transform(str) {
+					return `<mdui-icon name='local_offer'></mdui-icon>` + str
+				},
 				separator: ' '
 			}) %>
 		<% } %>

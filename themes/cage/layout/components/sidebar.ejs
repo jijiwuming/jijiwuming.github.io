@@ -1,0 +1,64 @@
+<div class="cage-sidebar" id="sidebar">
+	<div class="cage-avatar">
+		<a href="<%= theme.avatar %>" title="<%= config.author || config.title %>">
+			<img
+				src="<%= theme.avatar %>"
+				alt="<%= config.author || config.title %>"
+			/>
+		</a>
+	</div>
+	<div class="cage-count">
+		<div><span>文章</span><%= site.posts.length %></div>
+		<div><span>标签</span><%= site.tags.length %></div>
+		<div><span>分类</span><%= site.categories.length %></div>
+	</div>
+	<div class="cage-list">
+		<% for (name in theme.menu) { %>
+		<a
+			class="cage-list-item <%= is_current(theme.menu[name][0]) %>"
+			href="<%- url_for(theme.menu[name][0]) -%>"
+			title="<%= name %>"
+		>
+			<mdui-icon name="
+				<% if (theme.menu[name][1]) { %>
+					<%= theme.menu[name][1] %>
+				<% } else { %>
+					<%= 'check_box_outline_blank' %>
+				<% } %>
+			"></mdui-icon>
+			<div class="cage-list-item-content">
+				<%= name %>
+			</div>
+		</a>
+		<% } %>
+	</div>
+	<aside id="cage-sidebar">
+		<% theme.widgets.forEach(function(widget) {%>
+			<%- partial('widgets/' + widget) %>
+		<% }) %>
+	</aside>
+	<div class="cage-copyright">
+		&copy; <%= date(new Date(), 'YYYY') %>
+		<a href="<%- url_for('/') %>"><%= config.author || config.title %></a>
+		<br />
+		<%= __('Powered by') %> <a href="http://hexo.io/" target="_blank">Hexo</a>
+		<br />
+		<% if (theme.beian) { %>
+			<a
+				href="https://beian.miit.gov.cn/"
+				target="_blank"
+			>
+				<%= theme.beian %>
+			</a>
+		<% } %>
+		<%- theme.sidebar %>
+	</div>
+</div>
+<div
+	class="cage-sidebar-modal"
+	id="sidebar-modal"
+	onclick="(function(self) {
+		self.classList.remove('show');
+		document.querySelector('.cage-sidebar.show#sidebar').classList.remove('show');
+	})(this)"
+></div>

@@ -1,30 +1,106 @@
 .cage-posts {
-    width: 80%;
-    padding: 20px 20px 20px 40px;
-    display: grid;
-    row-gap: 20px;
-    .cage-post {
-        height: 200px;
+  padding: 40px 20px 20px;
+  display: grid;
+  row-gap: 20px;
+  .cage-post {
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-image: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.85) 25%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
+    &:hover {
+      box-shadow: 0 1px 5px #ccc;
+    }
+    .post-link {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      text-decoration: none;
+      color: #000;
+      .cage-post-cover {
+        display: flex;
+        align-content: center;
         overflow: hidden;
-        border-radius: 10px;
-        background-image: linear-gradient(to top, rgba(16, 16, 16, 0.35) 25%, rgba(16, 16, 16, 0) 100%);
-        .post-link {
-            display: flex;
-            height: 100%;
-            width: 100%;
-            text-decoration: none;
-            color: #000;
-            .cage-post-cover {
-                display: flex;
-                align-content: center;
-                img {
-                    max-height: 100%;
-                    max-width: 100%;
-                }
-                .right-wrapper {
-                    padding: 0 20px;
-                }
-            }
+        img {
+          height: 100%;
+          width: 200px;
+          object-fit: cover;
         }
+        .take-place {
+          height: 100%;
+          width: 200px;
+          background-color: $mainC;
+          background-image: linear-gradient(
+            to right bottom,
+            $mainC 0%,
+            $mainC 25%,
+            transparent 100%
+          );
+        }
+        .right-wrapper {
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          overflow: hidden;
+          .cage-post-title {
+            font-size: 24px;
+            line-height: 36px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+          .cage-post-meta {
+            .post-item {
+                display: inline-flex;
+                align-items: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.cage-page-nav {
+    list-style: none;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    mdui-icon {
+      color: $mainC;
+    }
+
+    .page-number {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        color: $mainCD2;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 4px;
+        text-decoration: none;
+        background-color: rgba(245,237,237,0.8);
+        transition: 300ms;
+        margin-inline: 10px;
+        &.current {
+          cursor: pointer;
+          color: #fff;
+          box-shadow: 0 1px 5px #ccc;
+        }
+    }
+    .extend {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 35px;
+
+    }
+    a:not(.current):hover {
+        background-color: rgba(245,237,237,0.4);
     }
 }

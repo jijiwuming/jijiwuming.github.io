@@ -1,26 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <% var title=page.title; if (is_archive()){ title=__('archive'); if
-    (is_month()){ title +='：' + page.year + '/' + page.month; } else if (is_year()){ title
-    +='：' + page.year; } } else if (is_category()){ title=__('count.categories') + '：' +
-    page.category; } else if (is_tag()){ title=__('count.tags') + '：' + page.tag; } %>
+    (is_month()){ title +='：' + page.year + '/' + page.month; } else if
+    (is_year()){ title +='：' + page.year; } } else if (is_category()){
+    title=__('count.categories') + '：' + page.category; } else if (is_tag()){
+    title=__('count.tags') + '：' + page.tag; } %>
     <title><% if (title){ %> <%= title %> - <% } %> <%= config.title %></title>
     <% if (theme.favicon) { %>
-        <link
-            rel="shortcut icon"
-            href="<%= theme.favicon.href %>"
-            type="<%= theme.favicon.type %>"
-        />
+    <link
+      rel="shortcut icon"
+      href="<%= theme.favicon.href %>"
+      type="<%= theme.favicon.type %>"
+    />
     <% } %>
-    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <!-- Filled -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Outlined -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+    <!-- Rounded -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet"
+    />
+    <!-- Sharp -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <!-- Two Tone -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone"
+      rel="stylesheet"
+    />
     <%- css("css/layout") %>
-</head>
-<body>
-    <%- body %>
-    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+  </head>
+  <body>
+    <div id="cage-top-header"></div>
+    <%- include("components/loading") %>
+    <div id="main-content" class="hidden-body ease-in">
+      <%- include("components/header") %>
+      <div class="cage-body">
+        <%- include("components/sidebar") %>
+        <div class="cage-content"><%- body %></div>
+        <%- include("components/right-column") %>
+      </div>
+    </div>
     <script src="/lib/lazysizes.min.js"></script>
-</body>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+  </body>
 </html>

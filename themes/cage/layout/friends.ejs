@@ -1,0 +1,12 @@
+<div class="cage-post">
+	<article class="cage-friend">
+		<%- image_auto_lazyload(page.content) %>
+        <%- partial('components/friends') %>
+	</article>
+	<% if (page.comments) { %>
+        <div class="cage-post-footer">
+            <%- partial('components/comments/gitalk') %>
+            <%- partial('components/comments/giscus') %>
+        </div>
+    <% } %>
+</div>
