@@ -1,7 +1,15 @@
 <% if (site.tags.length) { %>
 	<div class="cage-widget-wrap">
 		<div id="randomtagcloud" class="cage-widget tagcloud cage-rainbow">
-			<%- tagcloud() %>
+			<%- list_tags({
+				show_count: true,
+				style: "none",
+				class: "cage-tag ",
+				transform(str) {
+					return `<mdui-icon name='local_offer'></mdui-icon>` + str
+				},
+				separator: ""
+			}) %>
 		</div>
 		<% if (theme.maxTagcloud) { %>
 			<script>

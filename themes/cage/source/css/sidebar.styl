@@ -180,15 +180,27 @@
 			padding: 10px;
 			padding-bottom: 5px;
 
-			a {
+			a.cage-tag {
+				text-decoration: none;
 				border-radius: $radius;
 				padding: 5px 10px;
 				font-size: 12px !important;
-				display: inline-block;
-				margin-bottom: 5px;
-
-				&::before {
-					content: '# ';
+				display: inline-flex;
+				align-items: center;
+				column-gap: 4px;
+				color: #fff;
+				background-color: $mainC;
+				margin-bottom: 7px;
+				margin-right: 7px;
+				.-none-count {
+					background-color: #fff;
+					color: $mainC;
+					min-width: 20px;
+					height: 20px;
+					display: inline-flex;
+					justify-content: center;
+					align-items: center;
+					border-radius: 10px;
 				}
 			}
 		}
