@@ -8,26 +8,28 @@
 				alt="<%= page.title %>"
 				class="lazyload cage-post-cover-image disabled-cage-image"
 			/>
-			<h1><%= page.title %></h1>
+			<h1 class="cage-post-detail-title"><%= page.title %></h1>
 		</div>
 		<% } else { %>
 		<div
-			class="cage-post-cover"
-			style="padding-bottom: '<%= theme.background.height/theme.background.width * 100 %>%'"
-		>
+			class="cage-post-cover">
 			<img
 				data-src="<%- theme.background.path %>"
 				data-sizes="auto"
 				alt="<%= page.title %>"
 				class="lazyload cage-post-cover-image disabled-cage-image"
 			/>
-			<h1><%= page.title %></h1>
+			<h1 class="cage-post-detail-title"><%= page.title %></h1>
 		</div>
 		<% } %>
-		<div class="cage-post-meta cage-rainbow" style="margin:10px 0!important;">
+		<div class="cage-post-meta cage-post-item-wrapper cage-rainbow" style="margin:10px 0!important;">
 			<a class="post-item"><mdui-icon name="calendar_month"></mdui-icon><%- date(page.date, "YYYY年MM月DD日") %></a>
 			<a class="post-item"><mdui-icon name="edit"></mdui-icon><%= wordcount(page.content) %> 字</a>
 			<a class="post-item"><mdui-icon name="access_time"></mdui-icon>大概 <%= min2read(page.content, {cn: 250, en: 160}) %> 分钟</a>
+			<a id="busuanzi_container_page_pv" class="post-item">
+				<mdui-icon name='calculate'></mdui-icon>
+				本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+			</a>
 		</div>
 		<%- image_auto_lazyload(page.content) %>
 	</article>
