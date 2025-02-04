@@ -50,7 +50,14 @@ gitalk:
   active: false # 是否启用 gitalk
 # https://giscus.app/zh-CN 可以在这个网站上手动选择配置填到下方对应位置
 giscus:
-  active: false # 是否启用 giscus
+    active: true # 启用评论区
+    repo: jijiwuming/jijiwuming.github.io # 存放评论的 issue 所在的 repo
+    repoID: R_kgDONMpDfg # GitHub repo ID
+    category: Announcements
+    categoryID: DIC_kwDONMpDfs4CmohF
+    mapping: pathname
+    theme: light
+    lang: zh-CN
 # 友链配置
 friends:
     - avatar: https://pbs.twimg.com/profile_images/811606345711370240/YTuuvkm1_400x400.jpg
