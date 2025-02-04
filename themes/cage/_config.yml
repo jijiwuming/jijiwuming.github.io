@@ -13,6 +13,7 @@ cdn:
     js: https://unpkg.com/gitalk@latest/dist/gitalk.min.js
   giscus:
     js: https://giscus.app/client.js
+updated_option: "date"
 
 menu:
     回到首页:
