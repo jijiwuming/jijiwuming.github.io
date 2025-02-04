@@ -25,7 +25,7 @@ Element-UI在实现Fixed效果的手段为：针对有Column设置Fixed的ElTabl
 
 参考[problem-reproduction](https://github.com/jijiwuming/problem-reproduction/blob/main/src/components/table.vue)
 
-也可尝试[在线编辑](https://stackblitz.com/~/github.com/jijiwuming/problem-reproduction)
+也可尝试[在线编辑](https://stackblitz.com/edit/vue2-problem?file=src%2Fcomponents%2Ftable.vue)
 
 ## 问题定位
 

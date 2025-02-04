@@ -1,4 +1,8 @@
 <div class="cage-detail-post">
+	<% if (theme.copyableCodeblock) { %>
+		<%- css('css/code-copy') %>
+		<%- js('js/code-copy') %>
+	<% } %>
 	<article>
 		<% if (page.cover){ %>
 		<div class="cage-post-cover">

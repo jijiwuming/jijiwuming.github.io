@@ -19,6 +19,12 @@ element-ui中ElDialog的appendToBody的实现采用了将DOM节点挂载到docum
 
 > PS: 以下均以事后简化复现的示例进行讲解
 
+## 复现代码
+
+参考[problem-reproduction](https://github.com/jijiwuming/problem-reproduction/blob/main/src/components/list-with-dialog.vue)
+
+也可尝试[在线编辑](https://stackblitz.com/edit/vue2-problem?file=src%2Fcomponents%2Flist-with-dialog.vue)
+
 ### 1. 添加断点
 
 初步判断是组件更新过程中产生异常导致的，为了查找异常更新的原因，需要添加断点，但是不能直接添加普通的断点，因为直接添加断点每次更新都会被触发，太多的断点会导致无法找到有效的信息，我们知道vue的更新时机在nextTick时，通过flushSchedulerQueue执行watcher来完成，因此可以在flushSchedulerQueue过程中的watcher.run()添加断点，并且组件的更新渲染是通过渲染watcher（RenderWatcher）来实现的，那么找到合适的RenderWatcher就变得尤为重要，由于RenderWatcher在构建时有传入特殊标识isRenderWatcher，可以看到Watcher创建对应的逻辑，
