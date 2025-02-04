@@ -3,6 +3,10 @@ title: el-dialog在数组中的更新问题
 tags: [vue 2, element-ui]
 categories: [前端]
 ---
+
+老项目的弹窗展示后无法更新列表数据了
+<!-- more -->
+
 ## 问题表现
 
 公司的项目还在使用 Vue 2 和 element-ui ，在实现功能时发现了一个奇怪的问题，点开弹窗后再更新列表数据，列表数据不展示了。

@@ -4,6 +4,8 @@ tags: [vue 2, element-ui]
 categories: [前端]
 cover: https://th.bing.com/th/id/OIP.IXOC4xuxXLQGvzTWKxJgdAHaGF
 ---
+生产上老项目的气泡框工作异常了
+<!-- more -->
 ## 背景描述
 
 这几天在维护Vue2项目时产生了一个bug，表现为表格中的popover组件弹出后通过$refs去获取子组件操作属性突然失效了。
