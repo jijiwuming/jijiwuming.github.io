@@ -3,6 +3,7 @@ title: el-table-column设置fixed的影响
 tags: [vue 2, element-ui]
 categories: [前端]
 cover: https://th.bing.com/th/id/OIP.IXOC4xuxXLQGvzTWKxJgdAHaGF
+date: 2025-01-29 10:40:12
 ---
 生产上老项目的气泡框工作异常了
 <!-- more -->
