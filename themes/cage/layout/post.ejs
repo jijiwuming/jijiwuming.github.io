@@ -52,17 +52,17 @@
 				<% let ix = 0;%>
 				<% site.posts.sort('date').map(function(post){ %>
 				<% ix++; %> 
-					<% if(ix == i + 1 && post.title){ %>
-						<!-- 下一篇文章 -->
-						<div class="new">
-							<span>下一章</span>
-							<a href="<%- url_for(post.path) %>"> <%= post.title %></a>
-						</div>
-					<% } %>
 					<% if(ix == i - 1 && post.title){ %>
 						<!-- 上一篇文章 -->
 						<div class="old">
 							<span>上一章</span>
+							<a href="<%- url_for(post.path) %>"> <%= post.title %></a>
+						</div>
+					<% } %>
+					<% if(ix == i + 1 && post.title){ %>
+						<!-- 下一篇文章 -->
+						<div class="new">
+							<span>下一章</span>
 							<a href="<%- url_for(post.path) %>"> <%= post.title %></a>
 						</div>
 					<% } %>
