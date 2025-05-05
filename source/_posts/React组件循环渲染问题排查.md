@@ -63,7 +63,7 @@ toc: true
 可以看到React认为当前任务为"同步"，实际通过scheduleMicrotask（实际为queueMicrotask，参考同文件源码）安排了一个微任务更新，
 <b>React调度中所谓Sync的更新其实还是采用了异步的微任务（也有可能fallback到setTimeout）来实现的。</b>
 同时在这边我们也能看到其他的"异步"任务走了另一条分支scheduleCallback，
-实际"异步"任务是通过scheduler包的[unstable_scheduleCallback](https://github.com/facebook/react/blob/e9db3cc2d4175849578418a37f33a6fde5b3c6d8/packages/scheduler/src/forks/Scheduler.js#L327)进行了延时调度，感兴趣的读者可以自行探索其基于小根堆的调度实现。
+实际"异步"任务是通过scheduler包的[unstable_scheduleCallback](https://github.com/facebook/react/blob/e9db3cc2d4175849578418a37f33a6fde5b3c6d8/packages/scheduler/src/forks/Scheduler.js#L327)进行了宏任务调度，事实上scheduleCallback调用时基本没有使用到options参数的情况，因此基本是直接挂了个宏任务，并没有延时的部分，感兴趣的读者可以自行探索其基于小根堆的调度实现。
 
 ### 2.3 更新过程
 那么这个update的微任务执行的时候具体做了哪些事呢？
