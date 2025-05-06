@@ -91,7 +91,16 @@ toc: true
 让我们再仔细debugger一下Demo中setList的回调执行过程，可以看到【第27行】回调函数被执行完成后，对应hook的待执行队列并未清空。
 
 ![setList的回调](./images/React组件循环渲染问题排查/setList的回调.gif)
-原因在于【第48行】setList添加的任务为低优先级任务，不执行，但被保留下来了，而【第26行】setList由于添加任务在【第48行】之后，因此即使执行了，也被保留了。另外注意这边hook.baseState在循环中也一直都是[3]，因为React认为当前的状态更新类似于过渡态，为了保障最终状态的正确性，react的选择是保留了从暂未执行的update开始的状态和之后的所有操作，便于后续继续重新计算出最新的状态值（从这个角度看，react的状态管理有点像拿数据库日志做数据恢复的过程）。
+原因在于【第48行】setList添加的任务为低优先级任务，暂不执行，被保留到后续的待执行baseQueue中，
+而【第26行】添加的setList任务在【第48行】之后，为了保障最终结果的正确性，因此即使本次任务属于高优先级，当前执行了，但也要被保留到【第48行】任务的后面，也存入baseQueue中。
+这部分实现可以参考下图[源码](https://github.com/facebook/react/blob/845d93742fb090e7a35abea409a55e2a14613255/packages/react-reconciler/src/ReactFiberHooks.js#L1403)，其中newBaseQueueLast后续即为新的待执行baseQueue，
+可以看到【15800行】采用isSubsetOfLanes判断遍历到的更新任务是否应该立即执行：
+- 如果暂不执行，则为低优先级任务，先保留到newBaseQueueLast；
+- 如果需要立即执行，先判断newBaseQueueLast是否为null，若不为null，表示之前存在低优先级任务，则当前任务仍然需要保留，之后才执行任务。
+另外注意这边hook.baseState在循环中也一直都是[3]，这对应于下图代码中newBaseState的变化，
+因为React中针对存在不同优先级的状态更新时处理存在中间的"过渡态"，"过渡态"是初始状态+高优先级更新的产物，
+而为了保障最终状态的正确性，react实现上保留了从【第一个暂不执行的update的baseState】和【之后的所有update操作】，便于后续重新计算出最终的状态值。
+（从这个角度看，react的状态管理有点像拿数据库日志做数据恢复的过程）。
 
 ![hook针对queue的优先级处理](./images/React组件循环渲染问题排查/hook针对queue的优先级处理.png)
 再结合【第15行】useEffect针对依赖项是否产生变化的判断，可以看到【第26行】setList的回调每次都产生了新值，导致useEffect的回调会被执行到。
