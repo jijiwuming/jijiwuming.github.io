@@ -114,19 +114,20 @@ toc: true
 
 ![整体分析推导](./images/React组件循环渲染问题排查/整体分析推导.png)
 
-1. 根容器上响应click触发handleClick进行setF2；同时click进一步冒泡到body，安排了下一个宏任务。
-2. setF2安排了Sync的微任务执行更新渲染，从而走了【第48行】setList，此时处于flushPassiveEffects执行过程当中，此时变更list产生的更新，Lane优先级为DefaultEventPriority，从而使得任务的调度优先级为NormalSchedulerPriority，就先存了一个低优先级的宏任务在hook的queue上，等待后续执行。
+1. 宏任务：根容器上响应click触发合成事件，handleClick进行到setF2，setF2安排了Sync的微任务执行更新渲染
+2. 微任务：更新渲染时commit阶段，同步执行useEffect，执行到【第48行】setList，此时处于flushPassiveEffects执行过程当中，此时变更list产生的更新，Lane优先级为DefaultEventPriority，从而使得任务的调度优先级为NormalSchedulerPriority，就先存了一个低优先级的宏任务（MessageChannel）在hook的queue上，等待后续执行。
 
   ![useEffect内回调的优先级设置](./images/React组件循环渲染问题排查/useEffect内回调的优先级设置.png)
-3. 下一个宏任务触发onBodyClick执行【第26行】setList产生的更新Lane优先级为SyncLane，就又存了一个高优先级的任务在hook的queue上，并安排了Sync的微任务更新渲染。
-4. 微任务更新时先render，走【第11行】useState时，发现当前hook.queue上存在2个update，但是第一个是低优先，先保留不执行；第二个是高优先级任务，执行，但是由于前面有低优先级任务，也需要保留。此时hook.queue就没有被清理。
-5. 后续更新时走commit阶段，在commitRootImpl阶段，由于满足SyncLane条件导致effect回调被同步执行
+3. 下一个宏任务：注意此时虽然存了MessageChannel事件，但是同时click进一步冒泡到body，也是一个宏任务。那么该取哪个呢？浏览器会认为点击的冒泡是更高优先级的<sup>[参考](https://segmentfault.com/a/1190000037516439)</sup>。所以下一个宏任务触发onBodyClick，执行【第26行】setList产生的更新Lane优先级为SyncLane，就又存了一个高优先级的任务在hook的queue上，并安排了Sync的微任务更新渲染。
+4. 微任务: 进行组件更新
+   - 先render阶段，走【第11行】useState时，发现当前hook.queue上存在2个update，但是第一个是低优先，先保留不执行；第二个是高优先级任务，执行，但是由于前面有低优先级任务，也需要保留。此时hook.queue就没有被清理。
+   - 后commit阶段，在commitRootImpl阶段，由于满足SyncLane条件导致effect回调被同步执行
 
   ![同步effect回调被执行的时机](./images/React组件循环渲染问题排查/同步effect回调被执行的时机.gif)
-6. 同步执行回调时由于setF1([3])是在Promise.resolve()之后的，currentUpdatePriority已被重制，所以setF1添加的更新与第2步不同，此时添加的更新优先级等同于当前body.click事件的优先级，lane属于同步（高优先级），因此后续添加一个Sync的微任务更新渲染。
+5. Promise微任务: 同步执行回调时由于setF1([3])是在Promise.resolve()之后的，currentUpdatePriority已被重制。所以setF1添加的更新与第2步不同，此时添加的更新优先级等同于当前body.click事件的优先级，lane属于同步（高优先级），因此后续添加一个新的Sync的微任务更新渲染。
 
   ![setF1的更新lane优先级](./images/React组件循环渲染问题排查/setF1的更新lane优先级.gif)
-7. 由于前文已经提到，list这个hook.queue没有被清理，因此后一次渲染会重复4-6的步骤，导致微任务一直产生，就卡这了
+6. 由于前文已经提到，list这个hook.queue没有被清理，因此后一次渲染会重复4-5的步骤，导致微任务一直产生，就卡这了
 
 事实上这一切主要原因来自于React的任务优先级及调度设计
 ## 3.修复方案
