@@ -5,3 +5,4 @@ Thumbs.db
 public/
 .deploy*/
 _multiconfig.yml
+**/ignore/**
