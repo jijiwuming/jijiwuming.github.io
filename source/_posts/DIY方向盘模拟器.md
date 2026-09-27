@@ -170,15 +170,14 @@ odrv0.reboot()
 </pre>
 
 4. 先断开Odrive电源，再开始openFFB设置。
+OpenFFBoard Configurator 上位机软件, 从 [github这边](https://github.com/Ultrawipf/OpenFFBoard/releases) 获取
 <pre>
-将 OpenFFBoard (STM32F407) 通过 USB 插上电脑，打开 OpenFFBoard Configurator 上位机软件。
+将 OpenFFBoard (STM32F407) 通过 USB 插上电脑，打开 OpenFFBoard Configurator。
 1. 点击左侧导航栏的 Axis 0（主轴设置）-Motor Driver（电机驱动）：下拉菜单选择 ODrive (CAN)。
 
 2. CAN Baudrate（波特率）：选择 250k（必须与 ODrive 端一致）。
 
-3. Node ID：填入 0（匹配 axis0.config.can.node_id = 0）。
-
-Encoder Source（编码器源）：选择 Driver Encoder（即直接读取 ODrive 通过 CAN 回传的 MT6701 位置数据）。
+3. Node ID：填入 0（匹配 axis0.config.can_node_id = 0）。
 
 点击右下角 Save to Flash 保存设置。
 </pre>
@@ -191,9 +190,10 @@ Encoder Source（编码器源）：选择 Driver Encoder（即直接读取 ODriv
 -  **切断 Odrive 和 OpenFFBoard**: 确保 Odrive 和 STM32F407 的 USB 未插电脑，未供电。
 - **飞车预警**： 注意由于我们使用了2：1的齿轮，所以打一圈方向会有2个 Z 脉冲点位，默认上电回中操作会找最近的一个 Z 脉冲点位，但是openffb只识别这2个点位的其中一个，如果恰好上电后是停在另一个点位，会导致方向盘疯转，进入飞车状态。针对这个问题，可以重新全部断电，然后将方向盘转到另一个 Z 脉冲点位附近，然后重复下面的步骤。
 -  **ODrive 动力上电**: 保障电机周围没有障碍物，开启 ODrive 的 36V 动力电源。
-    *   *现象*: 电机通电后会自动缓慢旋转一小段距离，捕获到 Z 脉冲后瞬间停顿锁死。
+    *现象*: 电机通电后会自动缓慢旋转一小段距离，捕获到 Z 脉冲后瞬间停顿锁死。
 -  **连接 OpenFFBoard**: 在电机完全静止后，再插入 OpenFFBoard 的 USB 连接线，小心，此时有可能方向盘疯转，进入飞车状态。
-    *   *正常表现现象*: 方向盘呈现带有平顺回中力或阻尼手感的状态。
+    *飞车处理*: 如果出现飞车，一般有2种可能，一是上面说的Z 脉冲点位问题；另一个是OpenFFBoard下发反向了，可以尝试OpenFFBoard Configurator的Axis 0配置里找到 Invert Motor Direction（或者 Invert Axis/Driver），更改其当前状态（勾选变取消，取消变勾选）
+    *正常表现现象*: 方向盘呈现带有平顺回中力或阻尼手感的状态。
 
 
 ## 游戏配置
