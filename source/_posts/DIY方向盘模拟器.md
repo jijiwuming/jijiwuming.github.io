@@ -2,7 +2,7 @@
 title: DIY方向盘模拟器
 date: 2026-09-27 14:20:28
 categories: [教程]
-cover: /images/DIY方向盘模拟器/header.png
+cover: /images/DIY方向盘模拟器/header.jpg
 tags:
 ---
 一个6.5寸平衡车轮毂电机DIY方向盘模拟器的教程
